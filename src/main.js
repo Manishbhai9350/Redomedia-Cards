@@ -1,27 +1,21 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import './style.css'
+import Lenis from 'lenis'
+
 
 gsap.registerPlugin(ScrollTrigger)
 
+const lenis = new Lenis()
+
+gsap.ticker.add(t => {
+  lenis.raf(t * 1000)
+})
+gsap.ticker.lagSmoothing(0)
+
+lenis.on('scroll',ScrollTrigger.update())
+
 const CardRotations = [10, 0, -10]
-const Positions = [
-  {
-    left: '5%',
-    right: 'auto',
-    transform: 'rotate(-85deg) translate(-50%,-50%)'
-  },
-  {
-    left: '50%',
-    right: 'auto',
-    transform: 'rotate(0deg) translate(-50%,-50%)'
-  },
-  {
-    left: 'auto',
-    right: '5%',
-    transform: 'rotate(85deg) translate(-50%,-50%)'
-  },
-]
 
 function InRange(val, range = [0, 0]) {
   if (val >= range[0] && val < range[1]) return true;
@@ -56,7 +50,7 @@ window.addEventListener('DOMContentLoaded', function () {
     scrollTrigger: {
       trigger: '.cards',
       start: `top -${1 * innerHeight}`,
-      end: `+=${4 * innerHeight}`,
+      end: `+=${3 * innerHeight}`,
       scrub: true
     }
   })
@@ -72,17 +66,17 @@ window.addEventListener('DOMContentLoaded', function () {
   const TL2 = gsap.timeline({
     scrollTrigger: {
       trigger: '.cards',
-      start: `top -${4.5 * innerHeight}`,
+      start: `top -${4 * innerHeight}`,
       end: `+=${7 * innerHeight}`,
-      scrub: true
+      scrub: 2
     }
   })
   TL2.to(cards[0], {
-    left:'-5%',
+    left:'1%',
     transform:'translate(0%-50%)'
   }, '<')
   TL2.to(cards[2], {
-    left:'105%',
+    left:'99%',
     // right:'0',
     transform:'translate(100%-50%)'
   }, '<')

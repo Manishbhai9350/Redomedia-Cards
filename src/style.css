@@ -70,3 +70,18 @@ main {
     }
   }
 }
+
+@media (min-width:900px) {
+  .cards .card {
+    .number {
+      font-size: 2rem;
+    }
+    .about .title {
+      font-size: 2.5rem!important;
+    }
+    .about .info {
+      opacity: .8!important;
+      font-size: 1.2rem!important;
+    }
+  }
+}
